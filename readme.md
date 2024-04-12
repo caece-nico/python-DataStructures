@@ -15,6 +15,9 @@
     - [Link List y Big 0]()
     - [Nodos y LinkedList]()
     - [Constructor]()
+    - [append]()
+    - [pop]()
+    - [prepend]()
 
 
 
@@ -797,3 +800,44 @@ my_linked_list.head.next.next.next.value
 ```
 
 Siempre partimos del __head__ y en este caso cada vez que se inserta o hace __append__ de un nuevo node, se crea un nuevo nivel __next__ hasta llegas al nuevo __tail__
+
+### 3.2 Método pop para Linked List
+
+Este método elimina el último nodo __tail__ de la __Linked List__ conviertiendo al ante-ultimo nodo en el nuevo nodo __tail__ con __next:None__
+
+En este caso podemos tener dos casos que si o si hay que contemplar.
+1. Listas vacias.
+2. Listas con un único nodo.
+
+Este método es mas complicado porque no podemos ir hacia atrás en una __Linked List__, asique debemos comenzar desde el principio y buscar nodo a nodo hasta encontrar el que tiene __next:None__ y quedarnos con el anterior.
+
+![](./img/linkedlist-pop.png)
+
+Para poder llegar hasta el ante-ultimo nodo, vamos a empezar desde el __head__ con dos variables, una __temp__ y otra __pre__, esta ultima tendrá el último nodo visitado en la iteracion.
+La idea es __iterar__ desde __head__ hasta __tail__ con la variable __temp__ y detenernos cuando __next:None__ ese será el último nodo pero __pre__ habrá quedado en el ante-último.
+
+```python
+def pop(self):
+    if self.lenght == 0:
+        return None
+    temp = self.head
+    pre = self.head
+    
+    while (temp.next):
+        pre = temp
+        temp = temp.next
+
+    self.tail = pre
+    self.tail.next = None
+
+    self.lenght -=1
+
+    # Esto es si tenemos un elemento solo, despues de haber ejecutado la parte # de arriba, lenght queda en 0
+    if self.lenght == 0: 
+        self.head = None
+        self.tail = None
+    return temp # retornamos el nodo que eliminamos.
+```
+
+### 3.3 Método prepend para Linked List
+
