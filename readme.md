@@ -18,6 +18,9 @@
     - [append]()
     - [pop]()
     - [prepend]()
+    - [pop first]()
+    - [get]()
+    - [Explicacion mejorada de append]()
 
 
 
@@ -841,3 +844,67 @@ def pop(self):
 
 ### 3.3 Método prepend para Linked List
 
+Con este método vamos a agregar un nuevo nodo al inicio de la __Linked List__
+Debemos setear el __Pointer__ del nuevo nodo al __header__ anterior.
+
+- Si no hay nodos, entonces este nodo será el primero __head__ y __tail__.
+- Si hay solo un nodo el existente pasa a ser __tail__
+
+```python
+def prepend(self, value):
+    new_node = Node(value)
+
+    if self.lenght == 0:
+        self.head = new_node
+        self.tail = new_node
+    else:
+        new_node.next = self.head
+        self.head = new_node
+    self.lenght +=1
+    return True
+```
+
+### 3.4 Método pop first para Linked List
+
+En este caso, tenemos un nodo __head__ pero lo eliminamos y el nodo siguiente se convierte en el nuevo __head__
+
+- Una caso especial es si tenemos un solo __Nodo__ entonces tanto __head__ como __tail__ quedan en __None__
+- Otro caso especial es cuando la lista está vacia.
+
+```python
+def popfirst(self):
+    if self.lenght == 0:
+        return None
+    else:
+        temp = self.head
+        self.head = self.head.next
+        temp.next = None
+        self.lenght -=1
+
+    # Esto ultimo lo hacemos ya que si habia un elemento, ahora quedan 0 elementos pero el head y tail siguen apuntando a algo distinto de None
+    if self.lenght == 0:
+        self.head = None
+        self.tail = None
+
+    return temp
+```
+
+### 3.5 Método GET para Linked List
+
+Vamos a pasarle un __indice__ y retornar el __nodo__ de ese incide.
+
+- Es necesario validar que el __indice__ sea valido, ni negativo o mayor al __self.lenght__
+
+Para esto vamos a usar un for loop.
+
+```python
+def get(self, index):
+    if index < 0 or index >= self.lenght:
+        return None
+    
+    temp = self.head
+    for _ in range(index):
+        temp = temp.next
+    
+    return temp
+```
