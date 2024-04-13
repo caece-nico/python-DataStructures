@@ -23,6 +23,7 @@
     - [setValue]()
     - [Insert]()
     - [remove]()
+    - [reverse]()
     - [Explicacion mejorada de append]()
 
 
@@ -983,15 +984,45 @@ def remove(self, index):
     if index == 0:
         return self.popfirst():
 
-    if index == self.lenght:
+    if index == self.lenght -1:
         return self.pop()
 
     prep = self.get(index - 1)
 
     temp = prep.next ## nos devuelve el nodo que queremos eliminar.
     prep.next = temp.next
-    temp.next = None ## Le poneos None, porque estoes loq ue deveolvemos, no tiene sentido ver esto.
+    temp.next = None ## Le poneos None, porque esto eslo que deveolvemos, no tiene sentido ver esto.
     lenght -= 1
 
     return temp
+```
+
+### 3.8 Método reverse para Linked List
+
+Este es un ejercicio muy común en las entrevistas
+
+Para poder aplicar este método primero debemos invertir __head__ y __tail__ .
+
+![](./img/linkedinlist-reverse-1.png)
+
+Para la segunda parte, creamos dos variables extras, __before__ y __after__ e iteramos por la cantidad de elementos de la lista
+
+![](./img/linkedinlist-reverse-2.png)
+
+```python
+def reverse(self):
+    # primera parte para invertir head y tail
+    temp = self.head
+    self.head = self.tail
+    self.tail = temp
+
+    ## segunda parte.
+
+    after = temp.next
+    before = None
+    for _ in range(self.lenght):
+        after = temp.next
+        temp.next = before
+        before = temp
+        temp = after
 ```
