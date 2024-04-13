@@ -20,6 +20,9 @@
     - [prepend]()
     - [pop first]()
     - [get]()
+    - [setValue]()
+    - [Insert]()
+    - [remove]()
     - [Explicacion mejorada de append]()
 
 
@@ -906,5 +909,89 @@ def get(self, index):
     for _ in range(index):
         temp = temp.next
     
+    return temp
+```
+
+### 3.6 Método setValue para Linked List
+
+Usamos setValue para reemplazar un nodo existente por otro.
+Hay que tener en cuenta que los indices deben estar dentro de los limites.
+- Hay que buscar el elemento a remplazar, guardar su puntero y reemplazarlo.
+
+```python
+def setValue(self, index, value):
+    if index < 0 or index > self.lenght:
+        return None
+
+    # buscamos el nodo que está en la posicion index
+
+    temp = self.head # Ahora temp apunta al head
+
+    for _ in range(index):
+        temp = temp.next 
+
+    temp.value = value
+    return True
+```
+
+### 3.6 Método Insert para Linked List
+
+Para poder inserta un nuevo nodo en una posicion __index__ lo que necesitamos es el nodo anterior al indice que vamos a insertar. Esto lo podemos optener usando el __metodo get__.
+Ese nodo __tendrá la posicion de memoria del head__ . Con ese __nodo prodecesor__ vamos a hacer que __temp.next__ apunte al nuevo nodo y que __nuevo_nodo.next__ apunte a lo que tenia el next el __nodo predecesor__
+
+Tambien hayq ue tener en cuenta que pasa si nos exedemos de los indices y usar los métodos __append y prepend__ para insertar en el primer o ultimo nodo.
+
+![](./img/linkedlist-insert-index.png)
+
+
+
+```python
+def Insert(self, index, value):
+    new_node = Node(value)
+    if index <0  or index > self.lenght:
+        return None
+
+    if index == 0:
+        return self.preprend(new_node)
+
+    if index == self.lenght:
+        return self.append(new_node)
+
+    pre = get(index -1)
+    pre.next = new_node
+    new_node.next = pre.next
+    self.lenght +=1
+    return True
+```
+
+
+### 3.7 Método remove para Linked List
+
+Para poder implementar este método es necesario tener dos variables, __el nodo con el indice queremos eliminar__ y el __nodo inmediatamente anterior al indice__
+
+Podemos usar dos veecs la función __get(index)__ o podemos traer el nodo con __index -1__ y luego trabajar con la propiedad __prep.next__
+
+![](./img/linkedlist-remove-index.png)
+
+
+
+```python
+def remove(self, index):
+    if index < 0 or index > self.lenght:
+        return None
+
+    if index == 0:
+        return self.popfirst():
+
+    if index == self.lenght:
+        return self.pop()
+
+    prep = self.get(index - 1)
+
+    temp = prep.next ## nos devuelve el nodo que queremos eliminar.
+    prep.next = temp.next
+    temp.next = None ## Le poneos None, porque estoes loq ue deveolvemos, no tiene sentido ver esto.
+    lenght -= 1
+
     return temp
 ```
