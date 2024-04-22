@@ -28,6 +28,7 @@
 
 
 
+
 ## 1. Introduccion
 
 __Big 0__ Es una forma de comparar dos codigos, para determinar que tan eficientes son al momento de ejecutar.
