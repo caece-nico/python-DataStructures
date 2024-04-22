@@ -265,5 +265,17 @@ def remove_vertex(self, vertex):
     return False
 ```
 
+<div id ="image-table">
+<table>
+<tr>
+<td style="padding:10px">
+<img src="./img/img_grafos/graph_lista.png"/>
+</td>
+<td style="pading:10px">
+<img src="./img/linkedinlist-reverse-2.png"/>
+</td>
+</table>
+</div>
+
 
 
